@@ -1,0 +1,11 @@
+img {
+    margin-left: -14px;
+}
+
+a {
+    color: black !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
