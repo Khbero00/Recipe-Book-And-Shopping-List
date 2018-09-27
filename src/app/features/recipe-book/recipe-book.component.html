@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col">
-            <div class="btn btn-success">New Recipe</div>
+            <div class="btn btn-success" (click)="open(content)">New Recipe</div>
         </div>
     </div>
     <hr>
@@ -14,3 +14,31 @@
         </div>
     </div>
 </div>
+
+<ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Add Recipe</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="addRecipeForm">
+            <div class="form-group">
+              <label for="name">Name Of Recipe</label>
+              <input type="text" name="name" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group">
+                    <label for="description">Recipe Description</label>
+                    <textarea name="description" id="description" cols="30" rows="5" class="form-control" formControlName="description"></textarea>
+                  </div>
+            <div class="form-group">
+                <label for="imageUpload">Recipe Image Upload</label>
+                <input type="file" name="imageUpload" (change)="onFileChanged($event)" formControlName="imagePath">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-dark" (click)="onAddRecipe(); modal.close('Save click')">Save</button>
+        </div>
+      </ng-template>

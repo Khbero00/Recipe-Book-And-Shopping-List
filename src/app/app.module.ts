@@ -1,10 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {NoopAnimationsModule} from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
+
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 import { AppComponent } from './app.component';
 import { ShoppingListComponent } from './features/shopping-list/shopping-list.component';
@@ -15,6 +23,7 @@ import { RecipeItemComponent } from './features/recipe-book/recipe-list/recipe-i
 import { ShoppingListEditComponent } from './features/shopping-list/shopping-list-edit/shopping-list-edit.component';
 import { HeaderComponent } from './features/header/header.component';
 import { HomeComponent } from './features/home/home.component';
+import { environment } from '../environments/environment';
 
 const appRoutes: Routes = [
   {path: '', component: HomeComponent},
@@ -34,12 +43,20 @@ const appRoutes: Routes = [
     RecipeItemComponent,
     ShoppingListEditComponent,
     HeaderComponent,
-    HomeComponent
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireAuthModule,
+    AngularFireStorageModule,
+    HttpClientModule,
     FormsModule,
-    HttpModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule,
+    NoopAnimationsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),
   ],

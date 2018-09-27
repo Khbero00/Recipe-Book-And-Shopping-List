@@ -1,6 +1,6 @@
 <a [routerLink]="['/recipes', recipe.Id]">
   <div class="media shadow">
-    <img class="mr-3 col-2 d-none d-lg-block d-xl-block" src="{{recipe.imagePath}}" alt="recipe Image">
+    <img class="mr-3 col-2 d-none d-lg-block d-xl-block img-fluid" src="{{recipe.imagePath}}" alt="recipe Image">
     <div class="media-body">
       <h5 class="mt-0">{{recipe.name}}</h5>
         {{recipe.description}}
