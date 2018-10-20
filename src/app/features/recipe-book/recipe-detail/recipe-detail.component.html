@@ -1,31 +1,33 @@
-<div class="row">
-    <div class="col-9">
-        <img src="{{recipe.imagePath}}" alt="Recipe Image" class="img-fluid">
+<div *ngIf="recipe">
+    <div class="row">
+        <div class="col-9">
+            <img src="{{recipe.imagePath}}" alt="Recipe Image" class="img-fluid">
+        </div>
     </div>
-</div>
-<br><br>
-<div class="row">
-    <div class="col-9">
-        <h1><strong>{{recipe.name}}</strong></h1>
+    <br><br>
+    <div class="row">
+        <div class="col-9">
+            <h1><strong>{{recipe.name}}</strong></h1>
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-9">
-        <div ngbDropdown class="d-inline-block">
-      <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="dropdown-item">Action - 1</button>
-        <button class="dropdown-item">Another Action</button>
-        <button class="dropdown-item">Something else is here</button>
-      </div>
+    <div class="row">
+        <div class="col-9">
+            <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <button class="dropdown-item">Action - 1</button>
+            <button class="dropdown-item">Another Action</button>
+            <button class="dropdown-item">Something else is here</button>
+        </div>
+        </div>
     </div>
-</div>
-</div>
-<br>
-<div class="row">
-    <div class="col-9">
-        <div>
-            <h2><strong>{{recipe.description}}</strong></h2>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-9">
+            <div>
+                <h2><strong>{{recipe.description}}</strong></h2>
+            </div>
         </div>
     </div>
 </div>

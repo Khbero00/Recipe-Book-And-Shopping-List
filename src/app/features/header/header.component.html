@@ -1,18 +1,23 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Chef Shop</a>
+  <a class="navbar-brand" routerLink="/home">Chef Shop</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-        <a class="nav-link" routerLink="/">Home</a>
+        <a class="nav-link" routerLink="/home"><i class="fa fa-home" aria-hidden="true"></i> Home</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/recipes">Recipes</a>
+        <a class="nav-link" routerLink="/recipes"><i class="fa fa-utensils" aria-hidden="true"></i> Recipes</a>
       </li>
       <li class="nav-item" routerLinkActive="active">
-        <a class="nav-link" routerLink="/shopping-list">Shopping List</a>
+        <a class="nav-link" routerLink="/shopping-list"><i class="fa fa-shopping-cart" aria-hidden="true"></i> Shopping List</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" routerLinkActive="active">
+          <a (click)="logOut()" class="nav-link" routerLink="/login"><i class="fa fa-sign-out-alt"></i> Logout</a>
       </li>
     </ul>
   </div>

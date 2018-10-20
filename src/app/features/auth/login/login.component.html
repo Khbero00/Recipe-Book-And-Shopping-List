@@ -1,0 +1,25 @@
+<div class="container pt-3">
+    <div class="row justify-content-sm-center">
+      <div class="col-sm-6 col-md-4">
+        <div class="card border-info text-center">
+          <div class="card-header">
+            Welcome to Chef Shop
+          </div>
+          <div class="card-body">
+            <h4 class="text-center">Chef Shop</h4>
+            <form class="form-signin" [formGroup]="loginForm">
+              <input type="email" class="form-control mb-2" placeholder="Email" autofocus formControlName="email">
+              <input type="password" class="form-control mb-2" placeholder="Password" formControlName="password">
+              <button class="btn btn-lg btn-primary btn-block mb-1" type="button" (click)="onLogin()">Sign in</button>
+              <label class="checkbox float-left">
+                <input type="checkbox" value="remember-me">
+                Remember me
+              </label>
+              <a href="#" class="float-right">Forget Password?</a>
+            </form>
+          </div>
+        </div>
+        <a routerLink="/signup" class="float-right">Create an account </a>
+      </div>
+    </div>
+  </div>

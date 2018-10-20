@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '@myapp-models/recipe.model';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 
 @Injectable({
@@ -12,11 +13,13 @@ export class RecipeDataService {
   recipesCollection: AngularFirestoreCollection<Recipe>;
   recipes: Observable<Recipe[]>;
 
-  constructor(private afs: AngularFirestore) { }
+  constructor(private afs: AngularFirestore, private authService: AuthService) { }
 
   getRecipes(): Observable<Recipe[]> {
     this.recipesCollection = this.afs.collection('recipes', ref => {
-      return ref.orderBy('name');
+      return ref
+      .where("userId", "==", localStorage.getItem("userId"))
+      .orderBy("name");
     });
     
     return this.recipes = this.recipesCollection.valueChanges();

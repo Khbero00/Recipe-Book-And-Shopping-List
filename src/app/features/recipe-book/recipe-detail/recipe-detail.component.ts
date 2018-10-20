@@ -10,22 +10,18 @@ import { Recipe } from '@myapp-models/recipe.model';
 })
 export class RecipeDetailComponent implements OnInit {
 
-  recipes: Recipe[] = [];
-  recipe: any;
+  recipe: Recipe;
 
   constructor(private recipeDataService: RecipeDataService, private route: ActivatedRoute) { }
 
 
   ngOnInit() {
-    //this.recipeDataService.getRecipes().subscribe(recipes => this.recipes = recipes);
-
-
     this.route.params.subscribe((params: Params) => {
-      this.recipes.forEach(recipe => {
-       if (recipe.Id === +params['id']) {
-         this.recipe = recipe;
-       }
-      });
+      if (params && params['id']) {
+        this.recipeDataService.getRecipe(params['id']).subscribe(recipe => {
+          this.recipe = recipe;
+        });
+      }
     });
   }
 }

@@ -8,6 +8,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatCardModule} from '@angular/material/card';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+
 
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -24,13 +29,19 @@ import { ShoppingListEditComponent } from './features/shopping-list/shopping-lis
 import { HeaderComponent } from './features/header/header.component';
 import { HomeComponent } from './features/home/home.component';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './features/auth/login/login.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { SignUpComponent } from './features/auth/sign-up/sign-up.component';
 
 const appRoutes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'recipes', component: RecipeBookComponent, children: [
+  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'signup', component: SignUpComponent},
+  {path: 'home', canActivate: [AuthGuard], component: HomeComponent},
+  {path: 'recipes', canActivate: [AuthGuard], component: RecipeBookComponent, children: [
     {path: ':id', component: RecipeDetailComponent},
   ]},
-  {path: 'shopping-list', component: ShoppingListComponent}
+  {path: 'shopping-list', canActivate: [AuthGuard], component: ShoppingListComponent}
 ];
 
 @NgModule({
@@ -44,6 +55,8 @@ const appRoutes: Routes = [
     ShoppingListEditComponent,
     HeaderComponent,
     HomeComponent,
+    LoginComponent,
+    SignUpComponent,
   ],
   imports: [
     BrowserModule,
@@ -56,6 +69,10 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
+    MatCardModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+    MatInputModule,
     NoopAnimationsModule,
     NgbModule.forRoot(),
     RouterModule.forRoot(appRoutes),

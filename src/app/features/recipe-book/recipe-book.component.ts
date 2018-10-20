@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import { Recipe } from '@myapp-models/recipe.model';
 import { RecipeDataService } from '../../services/recipe-data.service';
 import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { Recipe } from '@myapp-models/recipe.model';
 
 @Component({
   selector: 'app-recipe-book',
@@ -23,14 +23,13 @@ export class RecipeBookComponent implements OnInit {
   constructor(private recipeDataService: RecipeDataService, private modalService: NgbModal, private storage: AngularFireStorage) { }
 
   ngOnInit() {
-      this.recipeDataService.getRecipes().subscribe(recipeData => {
-          this.recipes = recipeData;
-          console.log(this.recipes);
-      });
+      this.recipeDataService.getRecipes().subscribe(recipeData => this.recipes = recipeData);
       this.addRecipeForm = new FormGroup({
+      'id': new FormControl(0),
       'name': new FormControl(null, Validators.required),
       'description': new FormControl(null, Validators.required),
-      'imagePath': new FormControl(null, Validators.required)
+      'imagePath': new FormControl(null, Validators.required),
+      'userId': new FormControl(localStorage.getItem('userId'))
     });
   }
 
@@ -65,9 +64,7 @@ export class RecipeBookComponent implements OnInit {
     const fileRef = this.storage.ref(filePath);
     this.task = this.storage.upload(filePath, file);
     
-    this.task.snapshotChanges().pipe(
-      finalize(() => this.downloadURL = fileRef.getDownloadURL())
-    ).subscribe()
+    this.task.snapshotChanges().pipe(finalize(() => this.downloadURL = fileRef.getDownloadURL())).subscribe()
   }
 
   onAddRecipe() {
