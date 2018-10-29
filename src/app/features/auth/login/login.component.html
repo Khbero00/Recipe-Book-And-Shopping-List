@@ -1,25 +1,43 @@
-<div class="container pt-3">
-    <div class="row justify-content-sm-center">
-      <div class="col-sm-6 col-md-4">
-        <div class="card border-info text-center">
-          <div class="card-header">
-            Welcome to Chef Shop
-          </div>
-          <div class="card-body">
-            <h4 class="text-center">Chef Shop</h4>
-            <form class="form-signin" [formGroup]="loginForm">
-              <input type="email" class="form-control mb-2" placeholder="Email" autofocus formControlName="email">
-              <input type="password" class="form-control mb-2" placeholder="Password" formControlName="password">
-              <button class="btn btn-lg btn-primary btn-block mb-1" type="button" (click)="onLogin()">Sign in</button>
-              <label class="checkbox float-left">
-                <input type="checkbox" value="remember-me">
-                Remember me
-              </label>
-              <a href="#" class="float-right">Forget Password?</a>
-            </form>
-          </div>
-        </div>
-        <a routerLink="/signup" class="float-right">Create an account </a>
+<div class="login-container" [style.height.px]="screenHeight">
+    <div>
+        <h1 [ngClass]="{'smaller-screen-header': screenWidth <= 590, 'larger-screen-header': screenWidth > 590}">Welcome to Chef Shop</h1>
       </div>
-    </div>
-  </div>
+      <div fxFlexFill [fxLayout]="'column'">
+          <div fxFlexFill [fxLayout]="'row'" fxLayoutAlign="center center">
+             <mat-card class="login-card">
+                <mat-card-header>
+                </mat-card-header>
+                <h2>Login</h2>
+                <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                   <mat-card-content>
+                      <mat-form-field class="example-full-width" appearance="legacy">
+                         <input matInput
+                            placeholder="Email"
+                            name="email" formControlName="email">
+                         <mat-icon matSuffix>email</mat-icon>
+                      </mat-form-field>
+                      <span *ngIf="loginForm.get('email').errors && loginForm.get('email').touched" class="help-block">
+                          Please enter a valid email.
+                        </span>
+                      <mat-form-field class="example-full-width" appearance="legacy">
+                         <input matInput
+                            placeholder="Password"
+                            name="password"
+                            type="password"
+                            formControlName="password">
+                         <mat-icon matSuffix>lock</mat-icon>
+                      </mat-form-field>
+                      <span *ngIf="loginForm.get('password').errors && loginForm.get('email').touched" class="help-block">
+                          Please enter a valid password.
+                        </span>
+                   </mat-card-content>
+                   <mat-card-actions class="example-button-row">
+                      <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Sign in</button>
+                      <button routerLink="/signup" mat-raised-button color="accent">Sign Up</button>
+                      <button mat-raised-button color="warm">Forgot Password</button>
+                   </mat-card-actions>
+                </form>
+             </mat-card>
+          </div>
+       </div>
+</div>

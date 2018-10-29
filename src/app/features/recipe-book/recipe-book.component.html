@@ -1,45 +1,16 @@
-<app-header></app-header> 
+<app-header></app-header>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <div class="btn btn-success" (click)="open(content)">New Recipe</div>
-        </div>
+    <div fxLayout fxLayoutAlign="center center">
+        <h1 class="title">Khbero Baker's Recipes</h1>
     </div>
-    <hr>
-    <div class="row">
-        <div class="col">
-            <app-recipe-list [recipes]="recipes"></app-recipe-list>
-        </div>
-        <div class="col">
-            <router-outlet></router-outlet>
-        </div>
-    </div>
+    <mat-divider color="primary"></mat-divider>
+    <app-recipe-list [recipes]="recipes"></app-recipe-list> 
 </div>
-
-<ng-template #content let-modal>
-        <div class="modal-header">
-          <h4 class="modal-title" id="modal-basic-title">Add Recipe</h4>
-          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="addRecipeForm">
-            <div class="form-group">
-              <label for="name">Name Of Recipe</label>
-              <input type="text" name="name" class="form-control" formControlName="name">
-            </div>
-            <div class="form-group">
-                    <label for="description">Recipe Description</label>
-                    <textarea name="description" id="description" cols="30" rows="5" class="form-control" formControlName="description"></textarea>
-                  </div>
-            <div class="form-group">
-                <label for="imageUpload">Recipe Image Upload</label>
-                <input type="file" name="imageUpload" (change)="onFileChanged($event)" formControlName="imagePath">
-            </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-outline-dark" (click)="onAddRecipe(); modal.close('Save click')">Save</button>
-        </div>
-      </ng-template>
+<footer class="tab-actions" fxLayout="column" fxLayoutGap="20px">
+    <button mat-fab matTooltip="Add a new recipe" matTooltipPosition="before" color="primary" (click)="openDialog()">
+        <mat-icon>add</mat-icon>
+    </button>
+    <button mat-fab matTooltip="Delete all recipes" matTooltipPosition="before" color="warn">
+        <mat-icon>close</mat-icon>
+    </button>
+</footer>

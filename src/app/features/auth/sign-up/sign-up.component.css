@@ -1,6 +1,39 @@
-@media(min-width: 768px) {
-    .field-label-responsive {
-      padding-top: .5rem;
-      text-align: right;
-    }
-  }
+.sign-in-background {
+  background-image: url("src/assets/img/christiann-koepke-386015-unsplash.jpg"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  background-position: center center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  overflow: hidden;
+}
+
+.sign-up-accordion {
+  margin-top: 160px;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-headers-align .mat-expansion-panel-header-title,
+.example-headers-align .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.larger-screen-header {
+  font-size:9vw;
+  color: #fff;
+  text-align: center;
+}
+
+.smaller-screen-header {
+  font-size:9vw;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+}

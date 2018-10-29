@@ -1,7 +1,48 @@
-.card {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  }
 
-img {
-  width: 200px;
+
+.larger-screen-header {
+  font-size:8vw;
+  color: #fff;
+  text-align: center;
 }
+
+.smaller-screen-header {
+  font-size:9vw;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+.login-card {
+  width: 400px;
+  margin: 0;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-button-row {
+  display: flex;
+  align-items: right;
+  justify-content: space-around;
+}
+.login-button{
+  text-decoration: underline;
+  font-size: x-small;
+}
+.login-container {
+  background-image: url("src/assets/img/john-legrand-175771-unsplash.jpg"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
+    overflow: hidden;
+    margin: 0;
+}
+

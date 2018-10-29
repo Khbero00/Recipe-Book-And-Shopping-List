@@ -1,4 +1,21 @@
-.row {
-    padding-top: 20px;
-    padding-left: 20px;
+.title {
+  font-size: 80px;
+  margin-top: 30px;
+}
+
+.mat-divider {
+  border-top-width: 4px;
+  background-color: #673ab7;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 10px;
+}
+
+.tab-actions {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
 }

@@ -1,5 +1,5 @@
 export class Ingredient {
     public name: string;
-    public amount: number;
-    public price: number;
+    public quantity: number;
+    public recipeId: string;
 }

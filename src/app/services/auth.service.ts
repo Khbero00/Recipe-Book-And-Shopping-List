@@ -1,15 +1,10 @@
+
+import {map, switchMap,  filter } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-
-import 'rxjs/add/observable/fromPromise';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/switchMap';
-
-import { from, of } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { Observable ,  from, of } from 'rxjs';
 import { User } from '@myapp-models/user.model';
 
 @Injectable({
@@ -25,27 +20,27 @@ export class AuthService {
   }
   
   getUser(): Observable<any> {
-   return this.user.switchMap(userAuth => {
+   return this.user.pipe(switchMap(userAuth => {
         if (userAuth) {
           return this.afs.doc(`users/${userAuth.uid}`).valueChanges()
         } else {
           return of(false);
         }
-      })
+      }))
   }
 
   emailSignUp(email: string, password: string) {
-    return Observable.fromPromise(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
+    return from(this.afAuth.auth.createUserWithEmailAndPassword(email, password));
   }
 
   login(email: string, password: string): Observable<auth.UserCredential> {
-    return Observable.fromPromise(
+    return from(
       this.afAuth.auth.signInWithEmailAndPassword(email, password)
     );
   }
 
   isAuthenticated(): Observable<boolean> {
-    return this.user.map(user => user !== null && user.uid !== 'undefined');
+    return this.user.pipe(map(user => user !== null && user.uid !== 'undefined'));
   }
 
   logout() {

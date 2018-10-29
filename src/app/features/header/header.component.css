@@ -1,3 +1,29 @@
-.bg-dark {
-    background-color: black !important;
+.bg-custom {
+    background-color: #673ab7;
+}
+
+.elevation-z6 {
+    box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+}
+
+/* .navbar {
+    height: 70px
+} */
+
+.navbar-header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 8px 16px;
+}
+
+.example-fill-remaining-space {
+    /* This fills the remaining space, by using flexbox. 
+       Every toolbar row uses a flexbox row layout. */
+    flex: 1 1 auto;
+  }
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
 }

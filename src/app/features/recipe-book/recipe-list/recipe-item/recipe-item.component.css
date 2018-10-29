@@ -9,3 +9,24 @@ a {
 a:hover {
     text-decoration: none;
 }
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 10px;
+}
+
+.tab-actions {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.recipe-card {
+    margin-top: 50px;
+}
+
+.recipe-content {
+  margin-left: 10px;
+}
+

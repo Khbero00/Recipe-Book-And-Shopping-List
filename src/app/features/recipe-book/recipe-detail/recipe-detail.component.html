@@ -1,17 +1,17 @@
 <div *ngIf="recipe">
     <div class="row">
-        <div class="col-9">
+        <!-- <div class="col-9">
             <img src="{{recipe.imagePath}}" alt="Recipe Image" class="img-fluid">
-        </div>
+        </div> -->
     </div>
     <br><br>
     <div class="row">
-        <div class="col-9">
+        <div class="col">
             <h1><strong>{{recipe.name}}</strong></h1>
         </div>
     </div>
     <div class="row">
-        <div class="col-9">
+        <div class="col">
             <div ngbDropdown class="d-inline-block">
         <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
