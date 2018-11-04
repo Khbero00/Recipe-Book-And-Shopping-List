@@ -24,9 +24,20 @@ a:hover {
 
 .recipe-card {
     margin-top: 50px;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+
+.recipe-card:hover {
+  opacity: 1.0;
+  filter: alpha(opacity=100);
 }
 
 .recipe-content {
   margin-left: 10px;
+}
+
+.mat-divider {
+  border-top-color: transparent;
 }
 

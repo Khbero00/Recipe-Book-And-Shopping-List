@@ -14,6 +14,7 @@ import { HomeModule } from './features/home/home.module';
 import { RecipeBookModule } from './features/recipe-book/recipe-book.module';
 import { ShoppingListModule } from './features/shopping-list/shopping-list.module';
 import { SharedModule } from './shared/shared.module';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     BrowserAnimationsModule,
     // NoopAnimationsModule,
     HttpClientModule,
+    ReactiveFormsModule,
     AuthModule,
     HeaderModule,
     HomeModule,

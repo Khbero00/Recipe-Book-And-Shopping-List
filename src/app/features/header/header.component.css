@@ -1,14 +1,14 @@
 .bg-custom {
-    background-color: #673ab7;
+    background-color: #ffeb3b;
 }
 
 .elevation-z6 {
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
-/* .navbar {
-    height: 70px
-} */
+.nav-link, .navbar-brand {
+    color: #424242 !important;
+}
 
 .navbar-header {
     display: flex;

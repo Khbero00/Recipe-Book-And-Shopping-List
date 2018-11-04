@@ -18,7 +18,8 @@
     ],
 
     "paths": {
-      "@myapp-models/*": ["src/app/models/*"]
+      "@myapp-models/*": ["src/app/models/*"],
+      "@myapp-services/*": ["src/app/services/*"]
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -7,9 +7,20 @@ import { Router } from '@angular/router';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
+
+  email: string;
+  username: string;
 
   constructor(private authService: AuthService, private router: Router) {}
+
+
+  ngOnInit() {
+    this.email = localStorage.getItem('userEmail');
+    this.username = localStorage.getItem('username');
+    console.log(this.email);
+    console.log(this.username);
+  }
 
   logOut() {
     this.router.navigate(['/']);

@@ -1,70 +1,115 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+
+import { Observable, from } from 'rxjs';
+import {map} from 'rxjs/operators';
+
 import { Recipe } from '@myapp-models/recipe.model';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument, DocumentData } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Ingredient } from '@myapp-models/ingredient.model';
-import {forkJoin} from 'rxjs';
-import {take} from 'rxjs/operators'
 
 @Injectable({
   providedIn: 'root'
 })
 export class RecipeDataService {
   recipeItemDoc: AngularFirestoreDocument<Recipe>;
-  ingredientItemDoc: AngularFirestoreCollection<DocumentData>;
+  ingredientItemDoc: AngularFirestoreDocument<Ingredient>;
 
   recipesCollection: AngularFirestoreCollection<any>;
-  ingredientsCollection: AngularFirestoreCollection<Ingredient>;
+  ingredientsCollection: AngularFirestoreCollection<any>;
 
-  recipes: Observable<Recipe[]>;
-  ingredients: Observable<Ingredient[]>;
 
-  constructor(private afs: AngularFirestore, private authService: AuthService, private http: HttpClient) { }
+  constructor(private afs: AngularFirestore) {
+    this.recipesCollection = afs.collection('recipes');
+    this.ingredientsCollection = afs.collection('Ingredients');
+   }
 
   getRecipes(): Observable<Recipe[]> {
-    this.recipesCollection = this.afs.collection('recipes', ref => {
-      return ref
-      .where("userId", "==", localStorage.getItem("userId"))
-      .orderBy("name");
+    this.recipesCollection = this.afs.collection<Recipe[]>('recipes', ref => {
+      return ref.where("userId", "==", localStorage.getItem("userId"))
+                .orderBy("name");
     });
-    
-    return this.recipes = this.recipesCollection.valueChanges();
+    return this.recipesCollection.valueChanges();
   }
 
-  getIngredients(recipeId): Observable<any> {
+  getRecipe(id: string): Observable<Recipe> {
+    this.recipeItemDoc = this.afs.doc<Recipe>(`recipes/${id}`);
+    return this.recipeItemDoc.valueChanges();
+  }
+
+  saveRecipe(recipe: Recipe): Observable<any> {
+    const userId = localStorage.getItem('userId');
+    this.recipesCollection.doc(recipe.id).set({
+      id: recipe.id, 
+      name: recipe.name, 
+      directions: recipe.directions, 
+      nickName: recipe.nickName,
+      userId: userId
+    });
+
+    this.saveOrUpdateIngredients(recipe);
+    return this.recipesCollection.snapshotChanges();
+  }
+
+  updateRecipe(recipe: Recipe) {
+    const userId = localStorage.getItem('userId');
+    this.recipeItemDoc = this.afs.doc<Recipe>(`recipes/${recipe.id}`);
+    this.recipeItemDoc.update({
+      id: recipe.id,
+      name: recipe.name,
+      nickName: recipe.nickName,
+      directions: recipe.directions,
+      userId: userId
+    });
+
+    this.saveOrUpdateIngredients(recipe);
+    
+    return this.recipeItemDoc.snapshotChanges();
+  }
+
+  deleteRecipe(recipe: Recipe): Observable<any> {
+    return from(this.afs.doc(`recipes/${recipe.id}`).delete()).pipe(
+      map(r => {
+       this.deleteIngredients(recipe.ingredients);
+      }, error => console.log(error))
+    )
+  }
+
+  getIngredients(recipeId): Observable<Ingredient[]> {
     this.ingredientsCollection = this.afs.collection('Ingredients', ref => {
       return ref
       .where("recipeId", "==", recipeId)
       .orderBy("name");
     });
-   return this.ingredients = this.ingredientsCollection.valueChanges();
+   return this.ingredientsCollection.valueChanges();
   }
 
-  // getCompleteRecipes(): Observable<any> {
-  //   return forkJoin<Recipe[], Ingredient[]>([this.getRecipes().pipe(take(1)), this.getIngredients().pipe(take(1))]);
-  // }
-
-  getRecipe(id: string) {
-    this.recipeItemDoc = this.afs.doc<Recipe>(`recipes/${id}`);
-    return this.recipeItemDoc.valueChanges();
+  saveOrUpdateIngredients(recipe: Recipe) {
+    recipe.ingredients.forEach(ingredient => {
+      this.afs.doc<Ingredient>(`Ingredients/${ingredient.id}`).get()
+        .subscribe(docSnapshot => {
+          if (docSnapshot.exists) {
+            this.afs.doc<Ingredient>(`Ingredients/${ingredient.id}`).update({
+              id: ingredient.id,
+              name: ingredient.name,
+              quantity: ingredient.quantity,
+              recipeId: recipe.id
+          })
+          } else {
+            const ingredientId = this.afs.createId();
+            this.ingredientsCollection.doc(ingredientId).set({
+              id: ingredientId,
+              name: ingredient.name,
+              quantity: ingredient.quantity,
+              recipeId: recipe.id
+            });
+          }
+        })
+    })
   }
 
-  saveRecipe(recipe: Recipe) {
-    this.recipesCollection.add
-    this.recipesCollection.add({name: recipe.name, directions: recipe.directions, nickName: recipe.nickName}).then(documentRef => {
-      documentRef.update({id: documentRef.id, userId: localStorage.getItem('userId')});
-      recipe.id = documentRef.id;
-      this.saveIngredients(recipe);
+  deleteIngredients(ingredients: Ingredient[]) {
+    ingredients.forEach(ingredient => {
+      this.afs.doc(`Ingredients/${ingredient.id}`).delete();
     });
   }
-
-  saveIngredients(recipe: Recipe) {
-    recipe.ingredients.forEach(ingredient => {
-      this.ingredientsCollection.add(ingredient).then(documentRef => {
-        documentRef.update({recipeId: recipe.id});
-        });
-    })
-    }
-  }
+}

@@ -16,17 +16,17 @@
                </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-form-field class="example-full-width">
-               <input matInput placeholder="First name" formControlName="firstName" aria-describedby="firstNameHelpBlock">
+               <input matInput placeholder="First name" formControlName="firstName" required>
+               <mat-error *ngIf="(addUserForm.get('firstName').hasError('required') || addUserForm.get('firstName').hasError('whitespace')) && (addUserForm.get('firstName').touched)">
+                You must enter a valid <strong>first name</strong>.
+              </mat-error>
             </mat-form-field>
-            <span id="firstNameHelpBlock" class="form-text text-muted" 
-            *ngIf="(addUserForm.get('firstName').hasError('required') || addUserForm.get('firstName').hasError('whitespace')) && (addUserForm.get('firstName').touched)">
-            You must enter a valid first name.</span>
             <mat-form-field class="example-full-width">
-               <input matInput placeholder="Last Name" formControlName="lastName" aria-describedby="firstNameHelpBlock">
+               <input matInput placeholder="Last Name" formControlName="lastName" required>
+               <mat-error *ngIf="(addUserForm.get('lastName').hasError('required') || addUserForm.get('lastName').hasError('whitespace')) && (addUserForm.get('lastName').touched)">
+                You must enter a valid <strong>last name</strong>.
+              </mat-error>
             </mat-form-field>
-            <span id="lastNameHelpBlock" class="form-text text-muted" 
-            *ngIf="(addUserForm.get('lastName').hasError('required') || addUserForm.get('lastName').hasError('whitespace')) && (addUserForm.get('lastName').touched)">
-            You must enter a valid last name.</span>
             <mat-action-row>
                <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
             </mat-action-row>
@@ -43,17 +43,17 @@
                </mat-panel-description>
             </mat-expansion-panel-header>
             <mat-form-field class="example-full-width">
-               <input matInput placeholder="Username" formControlName="username" aria-describedby="usernameHelpBlock">
+               <input matInput placeholder="Username" formControlName="username" required>
+               <mat-error *ngIf="(addUserForm.get('username').hasError('required') || addUserForm.get('username').hasError('whitespace')) && (addUserForm.get('username').touched)">
+                You must enter a valid <strong>username</strong>.
+              </mat-error>
             </mat-form-field>
-            <span id="usernameHelpBlock" class="form-text text-muted" 
-            *ngIf="(addUserForm.get('username').hasError('required') || addUserForm.get('username').hasError('whitespace')) && (addUserForm.get('username').touched)">
-            You must enter a valid username.</span>
-            
             <mat-form-field class="example-full-width">
-               <input matInput placeholder="Email" formControlName="email" aria-describedby="emailHelpBlock">
+               <input matInput placeholder="Email" formControlName="email" required>
+               <mat-error *ngIf="addUserForm.get('email').hasError('required') && addUserForm.get('email').touched">
+                You must enter a valid <strong>email</strong>.
+              </mat-error>
             </mat-form-field>
-            <span id="emailHelpBlock" class="form-text text-muted" 
-            *ngIf="addUserForm.get('email').hasError('required') && addUserForm.get('email').touched">You must enter a valid email.</span>
             <mat-action-row>
                <button mat-raised-button color="warn" (click)="prevStep()">Previous</button>
                <button mat-raised-button color="primary" (click)="nextStep()">Next</button>
@@ -72,20 +72,24 @@
             </mat-expansion-panel-header>
             
             <mat-form-field class="example-full-width">
-               <input matInput type="password" placeholder="Password" formControlName="password" aria-describedby="passwordHelpBlock" [type]="hide ? 'password' : 'text'">
+               <input matInput type="password" #password placeholder="Password" 
+               formControlName="password" [type]="hide ? 'password' : 'text'" hintLabel="Password must be between 6 and 15 characters.">
                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+               <mat-hint align="end">{{password.value?.length || 0}}/15</mat-hint>
+               <mat-error *ngIf="((addUserForm.get('password').hasError('required'))) || (addUserForm.get('password').hasError('whitespace')) && (addUserForm.get('password').touched)">
+                You must enter a valid <strong>password</strong>.
+              </mat-error>
             </mat-form-field>
-            <span id="passwordHelpBlock" class="form-text text-muted" [hidden]="(!addUserForm.get('password').untouched) && (addUserForm.get('password').hasError('required'))">Password must be between 6 and 15 characters.</span>
-            <span id="passwordHelpBlock" class="form-text text-muted" *ngIf="((addUserForm.get('password').hasError('required')) || (addUserForm.get('password').hasError('whitespace'))) && (addUserForm.get('password').touched)">You must enter a valid password.</span>
-            
             <mat-form-field class="example-full-width">
-               <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" aria-describedby="confirmPasswordHelpBlock" [type]="hide ? 'password' : 'text'">
+               <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword" [type]="hide ? 'password' : 'text'">
                <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+               <mat-error *ngIf="addUserForm.get('confirmPassword').hasError('NotEqual') && addUserForm.get('confirmPassword').touched">
+                Password's <strong>don't match</strong>.
+              </mat-error>
+              <mat-error *ngIf="addUserForm.get('confirmPassword').hasError('required') && addUserForm.get('confirmPassword').touched">
+                You must <strong>confirm your password</strong>.
+              </mat-error>
             </mat-form-field>
-
-            <span id="confirmPasswordHelpBlock" class="form-text text-muted" *ngIf="addUserForm.get('confirmPassword').hasError('NotEqual') && addUserForm.get('confirmPassword').touched">Password's don't match.</span>
-            <span id="confirmPasswordHelpBlock" class="form-text text-muted" *ngIf="addUserForm.get('confirmPassword').hasError('required') && addUserForm.get('confirmPassword').touched">You must confirm your password.</span>
-            
             <mat-action-row>
                <button mat-raised-button color="warn" (click)="prevStep()">Previous</button>
                <button mat-raised-button color="primary" [disabled]="addUserForm.invalid" (click)="signUp()">Submit</button>

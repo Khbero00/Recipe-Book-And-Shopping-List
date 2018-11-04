@@ -4,7 +4,7 @@
           <mat-card-title>
              <h2>{{recipe.name}}</h2>
           </mat-card-title>
-          <mat-icon style="margin-top: 5px">
+          <mat-icon style="margin-top: 5px" color="primary">
              restaurant_menu
           </mat-icon>
           <mat-card-subtitle>
@@ -20,10 +20,10 @@
           </div>
        </mat-card-content>
        <mat-card-actions class="example-button-row">
-          <button mat-mini-fab matTooltip="Edit a recipe" matTooltipPosition="above" color="accent">
+          <button mat-mini-fab matTooltip="Edit a recipe" matTooltipPosition="above" color="accent" (click)="editRecipe(recipe)">
              <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab matTooltip="Delete a recipe" matTooltipPosition="above" color="warn" (click)="deleteRecipe()">
+          <button mat-mini-fab matTooltip="Delete a recipe" matTooltipPosition="above" color="warn" (click)="deleteRecipe(recipe)">
              <mat-icon>close</mat-icon>
           </button>
        </mat-card-actions>

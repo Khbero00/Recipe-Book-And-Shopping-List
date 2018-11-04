@@ -1,14 +1,14 @@
-import { Component, OnInit} from '@angular/core';
-import { FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import {FormGroup, FormArray } from '@angular/forms';
+import {MatDialog, MatSnackBar} from '@angular/material'
+import { AngularFirestore } from '@angular/fire/firestore';
 
-import { RecipeDataService } from '../../services/recipe-data.service';
-import { AngularFireStorage, AngularFireUploadTask } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
-import {MatDialog} from '@angular/material'
-import { Observable } from 'rxjs';
-import {concat} from 'rxjs/operators'
 import { Recipe } from '@myapp-models/recipe.model';
+import { RecipeFormService } from '@myapp-services/recipe-form.service';
+import { RecipeDataService } from '@myapp-services/recipe-data.service';
+
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+
 
 @Component({
   selector: 'app-recipe-book',
@@ -17,31 +17,35 @@ import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/ale
 })
 export class RecipeBookComponent implements OnInit {
   recipes: Recipe[] = [];
-  addRecipeForm: FormGroup;
-  closeResult: string;
-  task: AngularFireUploadTask;
-  downloadURL: Observable<string>;
-
-  dataSource: any;
-  columnsToDisplay = ['name', 'description'];
-  expandedElement: Recipe;
   
-  data: any;
-
-  constructor(private recipeDataService: RecipeDataService, private storage: AngularFireStorage, public dialog: MatDialog) { }
+  addRecipeForm: FormGroup;
+  
+  screenWidth: number;
+  
+  fullName: string;
+  
+  constructor(private recipeDataService: RecipeDataService, 
+              private recipeFormService: RecipeFormService,
+              private afs: AngularFirestore,
+              public dialog: MatDialog, 
+              public snackBar: MatSnackBar) { }
 
   ngOnInit() {
+    this.fullName = `${localStorage.getItem('firstName')} ${localStorage.getItem('lastName')}`;
+      this.screenWidth = window.innerWidth;
+
       this.recipeDataService.getRecipes().subscribe((recipes: Recipe[]) => {
         this.recipes = recipes;
         this.recipes.forEach(recipe => {
-          this.recipeDataService.getIngredients(recipe.id).subscribe(ingredients => recipe.ingredients = ingredients);
+          this.recipeDataService.getIngredients(recipe.id)
+          .subscribe(ingredients => recipe.ingredients = ingredients);
         });
-      })
+      });
 
-      this.addRecipeMethod();
+      this.addRecipeForm = this.recipeFormService.addRecipeForm();
   }
   
-  openDialog(): void {
+  public openDialog(): void {
     const dialogRef = this.dialog.open(AlertDialogComponent, {
       width: '750px',
       data: {recipeForm: this.addRecipeForm}
@@ -50,49 +54,29 @@ export class RecipeBookComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.addRecipeForm = result;
-        this.addRecipeForm.value.directions = Array.prototype.map.call(result.value.directions, s => s).toString();
+        this.addRecipeForm.value.directions = Array.prototype.map.
+        call(result.value.directions, s => s).toString();
         this.saveRecipe();
       }
       this.resetRecipeForm();
     });
   }
 
-  // onFileChanged(event) {
-  //   const file = event.target.files[0];
-    
-  //   if (file.type.split('/')[0] !== 'image') {
-  //     console.log("Image upload error");
-  //     return;
-  //   }
-    
-  //   //The Storage Path
-  //   const filePath = `photos/${file.name}_${new Date().getTime()}`;
-  //   const fileRef = this.storage.ref(filePath);
-  //   this.task = this.storage.upload(filePath, file);
-    
-  //   this.task.snapshotChanges().pipe(finalize(() => this.downloadURL = fileRef.getDownloadURL())).subscribe()
-  // }
-
-
-  private addRecipeMethod() {
-    this.addRecipeForm = new FormGroup({
-      'id': new FormControl(0),
-      'name': new FormControl(null, Validators.required),
-      'nickName': new FormControl(null, Validators.required),
-      'directions': new FormArray([], Validators.required),
-      'ingredients': new FormArray([], Validators.required),
-      'userId': new FormControl(localStorage.getItem('userId'))
+  public openSnackBar(status: string, action: string) {
+    this.snackBar.open(status, action, {
+      duration: 2000
     });
   }
 
   private saveRecipe() {
-    // this.downloadURL.subscribe(url => {
-    //   this.addRecipeForm.value.imagePath = url;
-    //   this.recipes.push(this.addRecipeForm.value);
-    // });
-    this.recipes.push(this.addRecipeForm.value);
-    this.recipeDataService.saveRecipe(this.addRecipeForm.value);
-    this.addRecipeForm.reset();
+    this.addRecipeForm.value.id = this.afs.createId();
+    this.recipeDataService.saveRecipe(this.addRecipeForm.value).subscribe(response => {
+      if (response[0].payload.doc.exists) {
+        this.openSnackBar("Recipe was saved successfully!", "Close");
+      }
+    }, error => {
+      this.openSnackBar("Recipe was not saved.", "Close");
+    })
   }
 
   private resetRecipeForm() {
@@ -101,12 +85,10 @@ export class RecipeBookComponent implements OnInit {
     let directionsArray = (<FormArray>this.addRecipeForm.get('directions'));
     let ingredientsArray = (<FormArray>this.addRecipeForm.get('ingredients'));
 
-    while(directionsArray.length) {
+    while(directionsArray.length)
       directionsArray.removeAt(0);
-    }
 
-    while(ingredientsArray.length) {
+    while(ingredientsArray.length) 
       ingredientsArray.removeAt(0);
-    }
   }
 }

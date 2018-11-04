@@ -19,14 +19,13 @@ export class AuthService {
     this.user = afAuth.authState;
   }
   
-  getUser(): Observable<any> {
-   return this.user.pipe(switchMap(userAuth => {
-        if (userAuth) {
-          return this.afs.doc(`users/${userAuth.uid}`).valueChanges()
-        } else {
-          return of(false);
-        }
-      }))
+  getUser(user) {
+    this.afs.doc(`users/${user.uid}`).valueChanges().subscribe((user: User) => {
+     localStorage.setItem('userEmail', user.email);
+     localStorage.setItem('username', user.username);
+     localStorage.setItem('firstName', user.firstName);
+     localStorage.setItem('lastName', user.lastName);
+    });
   }
 
   emailSignUp(email: string, password: string) {

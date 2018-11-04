@@ -1,16 +1,14 @@
-<app-header></app-header>
-<div class="container-fluid">
-    <div fxLayout fxLayoutAlign="center center">
-        <h1 class="title">Khbero Baker's Recipes</h1>
-    </div>
-    <mat-divider color="primary"></mat-divider>
-    <app-recipe-list [recipes]="recipes"></app-recipe-list> 
-</div>
-<footer class="tab-actions" fxLayout="column" fxLayoutGap="20px">
-    <button mat-fab matTooltip="Add a new recipe" matTooltipPosition="before" color="primary" (click)="openDialog()">
-        <mat-icon>add</mat-icon>
-    </button>
-    <button mat-fab matTooltip="Delete all recipes" matTooltipPosition="before" color="warn">
-        <mat-icon>close</mat-icon>
-    </button>
+<section class="container-fluid recipe-background">
+   <app-header></app-header>
+   <div>
+      <h1 class="title">{{fullName}}'s Recipes</h1>
+   </div>
+   <div>
+      <app-recipe-list [recipes]="recipes"></app-recipe-list>
+   </div>
+</section>
+<footer class="tab-actions">
+   <button mat-fab matTooltip="Add a new recipe" matTooltipPosition="before" color="primary" (click)="openDialog()">
+      <mat-icon>add</mat-icon>
+   </button>
 </footer>
