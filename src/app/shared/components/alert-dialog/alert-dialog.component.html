@@ -1,4 +1,4 @@
-<!--Login Error Message-->
+<!-- Error Message -->
 <ng-container *ngIf="dialogType === 'message'">
   <h1 mat-dialog-title>Login Error</h1>
   <div mat-dialog-content>
@@ -7,86 +7,4 @@
   <div mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="onNoClick()">Close</button>
   </div>
-</ng-container>
-
-<!--Deletion Confirmation Message-->
-<ng-container *ngIf="dialogType === 'deletionConfirmation'">
-    <h1 mat-dialog-title>Deletion Confirmation</h1>
-    <div mat-dialog-content>
-      <p>{{data.deletionConfirmation}}</p>
-    </div>
-    <div mat-dialog-actions>
-      <button mat-raised-button color="primary" (click)="onNoClick()">No Thanks</button>
-      <button mat-raised-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
-    </div>
-</ng-container>
-
-<!--Recipe Form-->
-<ng-container *ngIf="dialogType === 'recipeForm' || dialogType === 'editRecipe'">
-    <div mat-dialog-content fxFlex fxLayout="column">
-            <h1>Add Recipe</h1>
-            <form [formGroup]="recipeForm">
-              <div>
-                 <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Recipe Name" formControlName="name" required>
-                    <mat-error *ngIf="recipeForm.get('name').hasError('required') && recipeForm.get('name').touched">
-                      Recipe Name is <strong>required</strong>
-                    </mat-error>
-                  </mat-form-field>
-            
-                  <mat-form-field class="example-full-width">
-                      <input matInput placeholder="Recipe Nickname" formControlName="nickName" required>
-                      <mat-error *ngIf="recipeForm.get('nickName').hasError('required')">
-                        Recipe Nickname is <strong>required</strong>
-                      </mat-error>
-                    </mat-form-field>
-              </div>
-              <div id="directions" class="example-full-width" formArrayName="directions">
-                  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-                    <h4 fxFlex>Your Directions</h4>
-                    <button fxFLex mat-raised-button color="primary" (click)="addDirections()">Add Step <mat-icon>add</mat-icon></button>
-                  </div>
-                  <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2.5%"
-                  *ngFor="let step of recipeForm.get('directions').controls; let i = index;">
-                    <mat-form-field fxFlex>
-                      <input matInput [value]="createValue(i)" [formControlName]="i" required>
-                      <span matSuffix>
-                        <mat-icon fxFlex color="warn" (click)="removeDirection(i)">close</mat-icon>
-                      </span>
-                      <mat-error *ngIf="recipeForm.get('directions')['controls'][i].hasError('required')">
-                        Step is <strong>required</strong>
-                      </mat-error>
-                    </mat-form-field>
-                  </div>
-                </div>
-              <div class="example-full-width" formArrayName="ingredients">
-                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
-                  <h4 fxFlex>Your Ingredients</h4>
-                  <button fxFLex mat-raised-button color="primary" (click)="addIngredients()">Add Ingredient <mat-icon>add</mat-icon></button>
-                </div>
-                <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2.5%"
-                *ngFor="let ingredientGroup of recipeForm.get('ingredients').controls; let i = index;" [formGroupName]="i">
-                  <mat-form-field fxFlex>
-                    <input matInput placeholder="Ingredient Name" formControlName="name" required>
-                    <mat-error *ngIf="recipeForm.get('ingredients')['controls'][i].get('name').hasError('required')">
-                        Ingredient name is <strong>required</strong>
-                      </mat-error>
-                  </mat-form-field>
-                  <mat-form-field fxFlex>
-                    <input matInput placeholder="Ingredient Quantity" formControlName="quantity" required focus>
-                    <span matSuffix>
-                      <mat-icon fxFlex color="warn" (click)="removeIngredient(i)">close</mat-icon>
-                    </span>
-                    <mat-error *ngIf="recipeForm.get('ingredients')['controls'][i].get('quantity').hasError('required')">
-                        Ingredient quantity is <strong>required</strong>
-                      </mat-error>
-                  </mat-form-field>
-                </div>
-                <div id="recipe-buttons" fxLayoutAlign="center center" fxLayoutGap="2.5%">
-                <button mat-raised-button color="primary" [disabled]="recipeForm.invalid" [mat-dialog-close]="recipeForm">Save Recipe <mat-icon>save</mat-icon></button>
-                <button mat-raised-button color="accent" (click)="onNoClick()">Cancel Recipe <mat-icon>cancel</mat-icon></button>
-                </div>
-              </div>
-            </form>  
-    </div>
 </ng-container>

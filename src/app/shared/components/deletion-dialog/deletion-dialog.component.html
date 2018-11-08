@@ -1,0 +1,11 @@
+<!--Deletion Confirmation Message-->
+<ng-container *ngIf="dialogType === 'deletionConfirmation'">
+  <h1 mat-dialog-title>Deletion Confirmation</h1>
+  <div mat-dialog-content>
+    <p>{{data.deletionConfirmation}}</p>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onNoClick()">No Thanks</button>
+    <button mat-raised-button color="warn" [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+  </div>
+</ng-container>

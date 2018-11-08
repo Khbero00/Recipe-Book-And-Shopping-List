@@ -1,1 +1,28 @@
 
+<mat-card class="shopping-list-card">
+    <mat-card-header>
+       <mat-card-title>
+          <h2>{{shoppingList.name}}</h2>
+       </mat-card-title>
+       <mat-icon style="margin-top: 5px" color="primary">
+        shopping_basket
+       </mat-icon>
+    </mat-card-header>
+    <mat-card-content class="shopping-list-content">
+       <div fxFlex>
+          <h2>Shopping List Items</h2>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let item of shoppingList.items">{{item.name}}</mat-list-item>
+          </mat-list>
+       </div>
+    </mat-card-content>
+    <mat-card-actions class="example-button-row">
+       <button mat-mini-fab matTooltip="Edit a shoppping list" matTooltipPosition="above" color="primary" (click)="editShoppingList(shoppingList)">
+          <mat-icon>edit</mat-icon>
+       </button>
+       <button mat-mini-fab matTooltip="Delete a shopping list" matTooltipPosition="above" color="warn" (click)="deleteShoppingList(shoppingList)">
+          <mat-icon>close</mat-icon>
+       </button>
+    </mat-card-actions>
+ </mat-card>
+ <mat-divider></mat-divider>

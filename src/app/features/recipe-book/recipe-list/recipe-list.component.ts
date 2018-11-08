@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Recipe } from '@myapp-models/recipe.model';
-
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import { Recipe } from '@myapp-models/recipe.model';
 
 @Component({
   selector: 'app-recipe-list',

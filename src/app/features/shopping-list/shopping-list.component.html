@@ -1,1 +1,17 @@
 
+<section class="container-fluid shopping-list-background" *ngIf="shoppingLists">
+    <app-header></app-header>
+    <div>
+       <h1 class="title">{{fullName}}'s Shopping List</h1>
+    </div>
+    <div>
+        <div cdkDropList fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column" (cdkDropListDropped)="drop($event)">
+            <app-shopping-list-edit fxFlex="calc(50% - 25px)" fxLayoutGap="25px" *ngFor="let shoppingList of shoppingLists" [shoppingList]="shoppingList" cdkDrag></app-shopping-list-edit>
+        </div>
+    </div>
+ </section>
+ <footer class="tab-actions">
+    <button mat-fab matTooltip="Add a new shoppng list" matTooltipPosition="before" color="primary" (click)="openDialog()">
+       <mat-icon>add</mat-icon>
+    </button>
+ </footer>

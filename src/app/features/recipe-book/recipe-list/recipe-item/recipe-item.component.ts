@@ -3,7 +3,8 @@ import { Recipe } from '@myapp-models/recipe.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RecipeDataService } from '@myapp-services/recipe-data.service';
-import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+import { RecipeDialogComponent } from 'src/app/shared/components/recipe-dialog/recipe-dialog.component';
+import { DeletionDialogComponent } from 'src/app/shared/components/deletion-dialog/deletion-dialog.component';
 
 
 @Component({
@@ -22,7 +23,7 @@ export class RecipeItemComponent implements OnInit {
   }
 
   editRecipe(recipe: Recipe) {
-    const dialogRef = this.dialog.open(AlertDialogComponent, {
+    const dialogRef = this.dialog.open(RecipeDialogComponent, {
       width: '750px',
       data: {editRecipe : recipe}
     });
@@ -45,7 +46,7 @@ export class RecipeItemComponent implements OnInit {
   }
 
   deleteRecipe(recipe: Recipe) {
-    const dialogRef = this.dialog.open(AlertDialogComponent, {
+    const dialogRef = this.dialog.open(DeletionDialogComponent, {
       width: '750px',
       data: {deletionConfirmation : "Are you sure you want to delete this recipe?"}
     });

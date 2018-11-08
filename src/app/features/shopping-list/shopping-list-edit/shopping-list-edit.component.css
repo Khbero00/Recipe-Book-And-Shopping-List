@@ -1,0 +1,38 @@
+a {
+    color: black !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+.example-button-row button,
+.example-button-row a {
+  margin-right: 10px;
+}
+
+.tab-actions {
+  display: inline-block;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.shopping-list-card {
+    margin-top: 50px;
+    opacity: 0.7;
+    filter: alpha(opacity=70);
+}
+
+.shopping-list-card:hover {
+  opacity: 1.0;
+  filter: alpha(opacity=100);
+}
+
+.shopping-list-content {
+  margin-left: 12px;
+}
+
+.mat-divider {
+  border-top-color: transparent;
+}

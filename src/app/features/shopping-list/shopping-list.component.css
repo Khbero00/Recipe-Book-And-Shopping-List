@@ -1,0 +1,118 @@
+.mat-divider {
+    border-top-width: 4px;
+  }
+  
+  .container-fluid {
+    padding: 0;
+  }
+  
+  .example-button-row button,
+  .example-button-row a {
+    margin-right: 10px;
+  }
+  
+  .tab-actions {
+    display: inline-block;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+  }
+  
+  
+  /* Extra small devices (phones, 600px and down) */
+  @media only screen and (max-width: 600px) {
+    .title {
+      font-size: 80px;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+    
+    .shopping-list-background {
+      background-image: url("src/assets/img/georgios-kaleadis-1087072-unsplash.jpg"); /* The image used */
+      background-color: #cccccc; /* Used if the image is unavailable */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+      background-position: top center;
+      /* height: 100vh; */
+    }
+  } 
+  
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    .title {
+      font-size: 80px;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+  
+    .shopping-list-background {
+      background-image: url("src/assets/img/georgios-kaleadis-1087072-unsplash.jpg"); /* The image used */
+      background-color: #cccccc; /* Used if the image is unavailable */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+      background-position: top center;
+      /* height: 100vh; */
+    }
+  } 
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .title {
+      font-size: 8vw;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+  
+    .shopping-list-background {
+      background-image: url("src/assets/img/georgios-kaleadis-1087072-unsplash.jpg"); /* The image used */
+      background-color: #cccccc; /* Used if the image is unavailable */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+      background-position: top center;
+      overflow: hidden;
+      height: 100vh;
+    }
+  } 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .title {
+      font-size: 8vw;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+    
+    .shopping-list-background {
+      background-image: url("src/assets/img/georgios-kaleadis-1087072-unsplash.jpg"); /* The image used */
+      background-color: #cccccc; /* Used if the image is unavailable */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+      background-position: top center;
+      overflow: hidden;
+      height: 100vh;
+    }
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .title {
+      font-size: 8vw;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+    
+    .shopping-list-background {
+      background-image: url("src/assets/img/georgios-kaleadis-1087072-unsplash.jpg"); /* The image used */
+      background-color: #cccccc; /* Used if the image is unavailable */
+      background-repeat: no-repeat; /* Do not repeat the image */
+      background-size: cover; /* Resize the background image to cover the entire container */
+      background-position: top center;
+      overflow: hidden;
+      height: 100vh;
+    }
+  }

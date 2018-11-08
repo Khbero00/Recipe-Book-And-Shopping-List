@@ -1,0 +1,44 @@
+<!--Shopping List Form-->
+<ng-container>
+    <div mat-dialog-content fxFlex fxLayout="column">
+        <h1>Add Shopping List</h1>
+        <form [formGroup]="shoppingListForm">
+          <div>
+             <mat-form-field class="example-full-width">
+                <input matInput placeholder="Shopping List Name" formControlName="name" required>
+                <mat-error *ngIf="shoppingListForm.get('name').hasError('required') && shoppingListForm.get('name').touched">
+                  Shopping List Name is <strong>required</strong>
+                </mat-error>
+              </mat-form-field>
+          </div>
+          <div class="example-full-width" formArrayName="items">
+              <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column">
+                <h4 fxFlex>Your Shopping List Items</h4>
+                <button fxFLex mat-raised-button color="primary" (click)="addItems()">Add Item <mat-icon>add</mat-icon></button>
+              </div>
+             <div fxLayout="row" fxLayout.xs="column" fxLayout.sm="column" fxLayoutGap="2.5%"
+              *ngFor="let itemGroup of shoppingListForm.get('items').controls; let i = index;" [formGroupName]="i">
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="Item Name" formControlName="name" required>
+                  <mat-error *ngIf="shoppingListForm.get('items')['controls'][i].get('name').hasError('required')">
+                      Item name is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field fxFlex>
+                  <input matInput placeholder="Item Quantity" formControlName="quantity" required focus>
+                  <span matSuffix>
+                    <mat-icon fxFlex color="warn" (click)="removeItem(i)">close</mat-icon>
+                  </span>
+                  <mat-error *ngIf="shoppingListForm.get('items')['controls'][i].get('quantity').hasError('required')">
+                      Item quantity is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+              </div>
+              <div id="shopping-list-buttons" fxLayoutAlign="center center" fxLayoutGap="2.5%">
+              <button mat-raised-button color="primary" [disabled]="shoppingListForm.invalid" [mat-dialog-close]="shoppingListForm">Save Shopping List <mat-icon>save</mat-icon></button>
+              <button mat-raised-button color="accent" (click)="onNoClick()">Cancel Shopping List <mat-icon>cancel</mat-icon></button>
+              </div>
+            </div>
+        </form>  
+   </div>
+</ng-container>

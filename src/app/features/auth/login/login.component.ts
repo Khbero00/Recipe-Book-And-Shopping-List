@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material';
 import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
 
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -47,7 +46,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
       userAuth => {
         this.authService.getUser(userAuth.user);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/recipes']);
       },
       error =>  {
         if (error && error.code) {

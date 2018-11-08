@@ -24,11 +24,10 @@ export class RecipeDataService {
    }
 
   getRecipes(): Observable<Recipe[]> {
-    this.recipesCollection = this.afs.collection<Recipe[]>('recipes', ref => {
+    return this.afs.collection<Recipe>('recipes', ref => {
       return ref.where("userId", "==", localStorage.getItem("userId"))
                 .orderBy("name");
-    });
-    return this.recipesCollection.valueChanges();
+    }).valueChanges();
   }
 
   getRecipe(id: string): Observable<Recipe> {
@@ -74,13 +73,12 @@ export class RecipeDataService {
     )
   }
 
-  getIngredients(recipeId): Observable<Ingredient[]> {
-    this.ingredientsCollection = this.afs.collection('Ingredients', ref => {
+  getIngredientsByRecipeId(recipeId): Observable<Ingredient[]> {
+    return this.afs.collection<Ingredient>('Ingredients', ref => {
       return ref
       .where("recipeId", "==", recipeId)
       .orderBy("name");
-    });
-   return this.ingredientsCollection.valueChanges();
+    }).valueChanges();
   }
 
   saveOrUpdateIngredients(recipe: Recipe) {
