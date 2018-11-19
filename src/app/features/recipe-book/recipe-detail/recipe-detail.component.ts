@@ -33,8 +33,7 @@ export class RecipeDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe((params: Params) => {
       if (params && params['id']) {
-        this.recipeDataService.getRecipe(params['id'])
-        .subscribe(recipe => {
+        this.recipeDataService.getRecipe(params['id']).subscribe(recipe => {
           this.recipe = recipe;
           this.recipe.directions = recipe.directions.split(',');
           this.recipeDataService.getIngredientsByRecipeId(recipe.id)
@@ -73,17 +72,15 @@ export class RecipeDetailComponent implements OnInit {
         }
       }, () => {
         this.openSnackBar("Shopping list was not saved.", "Close");
-      })
-      }
+      });
       let itemsArray = (<FormArray>shoppingListFormGroup.get('items'));
-
-    while(itemsArray.length) 
-      itemsArray.removeAt(0);
-    
-    shoppingListFormGroup.value.shoppingListAdd = false;
-
-    shoppingListFormGroup.reset();
-    this.router.navigate(['/shopping-list']);
+      while(itemsArray.length) 
+        itemsArray.removeAt(0);
+        
+      shoppingListFormGroup.reset();
+      shoppingListFormGroup.reset();
+      this.router.navigate(['/shopping-list']);
+      }
     });
   }
   openSnackBar(status: string, action: string) {

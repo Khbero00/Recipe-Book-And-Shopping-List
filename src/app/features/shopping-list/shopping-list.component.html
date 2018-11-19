@@ -5,8 +5,8 @@
        <h1 class="title">{{fullName}}'s Shopping List</h1>
     </div>
     <div>
-        <div cdkDropList fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column" (cdkDropListDropped)="drop($event)">
-            <app-shopping-list-edit fxFlex="calc(50% - 25px)" fxLayoutGap="25px" *ngFor="let shoppingList of shoppingLists" [shoppingList]="shoppingList" cdkDrag></app-shopping-list-edit>
+        <div fxLayout="row wrap" fxLayout.xs="column" fxLayout.sm="column">
+            <app-shopping-list-edit fxFlex="calc(50% - 25px)" fxLayoutGap="25px" *ngFor="let shoppingList of shoppingLists" [shoppingList]="shoppingList"></app-shopping-list-edit>
         </div>
     </div>
  </section>

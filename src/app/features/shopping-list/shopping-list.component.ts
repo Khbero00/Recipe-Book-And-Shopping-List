@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatSnackBar, MatDialog } from '@angular/material';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Items } from '@myapp-models/items.model';
 import { ShoppingList } from '@myapp-models/shopping-list.model';
@@ -42,10 +41,6 @@ export class ShoppingListComponent implements OnInit {
         });
       });
     this.addShoppingListForm = this.shoppingListFormService.addShoppingListForm();
-  }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.shoppingLists, event.previousIndex, event.currentIndex);
   }
 
   onResize(event) {

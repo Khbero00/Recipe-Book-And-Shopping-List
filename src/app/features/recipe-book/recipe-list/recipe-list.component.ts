@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 import { Recipe } from '@myapp-models/recipe.model';
 
 @Component({
@@ -15,7 +14,4 @@ export class RecipeListComponent implements OnInit {
   ngOnInit() {
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.recipes, event.previousIndex, event.currentIndex);
-  }
 }

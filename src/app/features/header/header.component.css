@@ -5,7 +5,9 @@
 }
 
 .nav-link, .navbar-brand { color: #424242 !important; }
-
+.nav-link:hover {
+    color: lightgray !important;
+}
 .navbar-header {
     display: flex;
     flex-wrap: wrap;
@@ -19,3 +21,4 @@
 .example-button-row a {
   margin-right: 8px;
 }
+
