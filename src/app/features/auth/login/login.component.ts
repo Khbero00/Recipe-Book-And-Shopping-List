@@ -1,9 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import {MatDialog} from '@angular/material';
-import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+
+import { map, concatAll } from 'rxjs/operators';
+
+import { User } from '@myapp-models/user.model';
+import { AuthService } from '@myapp-services/auth.service';
+import { AlertDialogComponent } from '@myapp-shared-components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-login',
@@ -11,12 +15,9 @@ import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/ale
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
   loginForm: FormGroup;
-  
   screenWidth: number;
   screenHeight: number;
-
   loginStyles: any;
 
   constructor(private authService: AuthService, private router: Router, public dialog: MatDialog) { }
@@ -37,21 +38,28 @@ export class LoginComponent implements OnInit {
       data: {message: "Your email or password was invalid."}
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       console.log('The dialog was closed');
     });
   }
 
   onLogin() {
-    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe(
-      userAuth => {
-        this.authService.getUser(userAuth.user);
-        this.router.navigate(['/recipes']);
-      },
-      error =>  {
-        if (error && error.code) {
-          this.openDialog();
-        }
-      });
+    this.authService.login(this.loginForm.value.email, this.loginForm.value.password).pipe(
+      map(userAuth => this.authService.getUser(userAuth.user)),
+      
+      //merge values from inner observable
+      concatAll()
+    
+      ).subscribe((userData: User) => {
+       localStorage.setItem('userEmail', userData.email);
+       localStorage.setItem('username', userData.username);
+       localStorage.setItem('firstName', userData.firstName);
+       localStorage.setItem('lastName', userData.lastName);
+       this.router.navigate(['/recipes']);
+    }, error =>  {
+      if (error && error.code) {
+        this.openDialog();
+      }
+    });
   }
 }

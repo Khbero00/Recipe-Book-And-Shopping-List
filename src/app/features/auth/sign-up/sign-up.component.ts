@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatDialog } from '@angular/material';
-
-import { AuthService } from 'src/app/services/auth.service';
-
-import { AlertDialogComponent } from 'src/app/shared/components/alert-dialog/alert-dialog.component';
+import { AuthService } from '@myapp-services/auth.service';
+import { AlertDialogComponent } from '@myapp-shared-components/alert-dialog/alert-dialog.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +17,7 @@ export class SignUpComponent implements OnInit {
   screenWidth: number;
   screenHeight: number;
   step = 0;
+  hide = true;
 
   constructor(private authService: AuthService, private afs: AngularFirestore, private router: Router,public dialog: MatDialog) { }
 
@@ -90,7 +88,7 @@ openDialog(errorMessage: string): void {
     data: {message: errorMessage}
   });
 
-  dialogRef.afterClosed().subscribe(result => {
+  dialogRef.afterClosed().subscribe(() => {
     console.log('The dialog was closed');
   });
 }

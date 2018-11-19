@@ -1,5 +1,5 @@
 .sign-in-background {
-  background-image: url("src/assets/img/ruben-bagues-193925-unsplash.jpg"); /* The image used */
+  background-image: url("https://images.unsplash.com/photo-1484924972457-c7f191b5d087?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=21620c4c54ea16777572c6e63e8dfb1c&auto=format&fit=crop&w=1343&q=80"); /* The image used */
   background-color: #cccccc; /* Used if the image is unavailable */
   background-position: center center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */

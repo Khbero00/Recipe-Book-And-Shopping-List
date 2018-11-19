@@ -30,14 +30,14 @@
 .example-button-row {
   display: flex;
   align-items: right;
-  justify-content: space-around;
+  justify-content: center;
 }
 .login-button{
   text-decoration: underline;
   font-size: x-small;
 }
 .login-container {
-  background-image: url("src/assets/img/john-legrand-175771-unsplash.jpg"); /* The image used */
+  background-image: url("https://images.unsplash.com/photo-1481798699994-481e7c0a8282?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4c02fb2ca219a8fffb55f292aa483861&auto=format&fit=crop&w=1350&q=80"); /* The image used */
   background-color: #cccccc; /* Used if the image is unavailable */
     background-position: center; /* Center the image */
     background-repeat: no-repeat; /* Do not repeat the image */

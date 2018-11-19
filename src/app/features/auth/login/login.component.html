@@ -15,10 +15,10 @@
                             placeholder="Email"
                             name="email" formControlName="email">
                          <mat-icon matSuffix>email</mat-icon>
+                         <mat-error *ngIf="loginForm.get('email').errors && loginForm.get('email').touched">
+                           Please enter a valid email.
+                         </mat-error>
                       </mat-form-field>
-                      <span *ngIf="loginForm.get('email').errors && loginForm.get('email').touched" class="help-block">
-                          Please enter a valid email.
-                        </span>
                       <mat-form-field class="example-full-width" appearance="legacy">
                          <input matInput
                             placeholder="Password"
@@ -26,15 +26,14 @@
                             type="password"
                             formControlName="password">
                          <mat-icon matSuffix>lock</mat-icon>
-                      </mat-form-field>
-                      <span *ngIf="loginForm.get('password').errors && loginForm.get('email').touched" class="help-block">
+                         <mat-error *ngIf="loginForm.get('password').errors && loginForm.get('email').touched">
                           Please enter a valid password.
-                        </span>
+                         </mat-error>
+                      </mat-form-field>
                    </mat-card-content>
                    <mat-card-actions class="example-button-row">
                       <button type="submit" mat-raised-button color="primary" [disabled]="loginForm.invalid">Sign in</button>
                       <button routerLink="/signup" mat-raised-button color="accent">Sign Up</button>
-                      <button mat-raised-button color="warm">Forgot Password</button>
                    </mat-card-actions>
                 </form>
              </mat-card>

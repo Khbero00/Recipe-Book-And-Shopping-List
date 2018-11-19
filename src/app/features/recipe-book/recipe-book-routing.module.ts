@@ -5,9 +5,8 @@ import { RecipeBookComponent } from './recipe-book.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 
 const recipeRoutes: Routes = [
-    {path: 'recipes', canActivate: [AuthGuard], component: RecipeBookComponent, children: [
-        {path: ':id', component: RecipeDetailComponent},
-      ]},
+    {path: 'recipes', canActivate: [AuthGuard], component: RecipeBookComponent},
+    {path: 'recipes/:id',canActivate: [AuthGuard], component: RecipeDetailComponent}
 ];
 
 @NgModule({

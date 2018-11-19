@@ -4,7 +4,6 @@ import { RouterModule } from '@angular/router';
 
 import { HeaderModule } from '../header/header.module';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { CommonModule } from '@angular/common';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeBookComponent } from './recipe-book.component';
@@ -29,7 +28,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
       ReactiveFormsModule,
       SharedModule,
       FlexLayoutModule,
-      NgbModule.forRoot(),
       RecipeBookRoutingModule
   ],
 })

@@ -67,7 +67,7 @@ export class RecipeDataService {
 
   deleteRecipe(recipe: Recipe): Observable<any> {
     return from(this.afs.doc(`recipes/${recipe.id}`).delete()).pipe(
-      map(r => {
+      map(() => {
        this.deleteIngredients(recipe.ingredients);
       }, error => console.log(error))
     )
@@ -103,6 +103,9 @@ export class RecipeDataService {
           }
         })
     })
+  }
+  deleteIngredient(ingredientId: string) {
+    this.afs.doc(`Ingredients/${ingredientId}`).delete();
   }
 
   deleteIngredients(ingredients: Ingredient[]) {

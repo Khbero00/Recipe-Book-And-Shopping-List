@@ -11,6 +11,8 @@ import { AlertDialogComponent } from './components/alert-dialog/alert-dialog.com
 import { ShoppingListDialogComponent } from './components/shopping-list-dialog/shopping-list-dialog.component';
 import { DeletionDialogComponent } from './components/deletion-dialog/deletion-dialog.component';
 
+
+
 RecipeDialogComponent
 
 @NgModule({
@@ -25,7 +27,7 @@ RecipeDialogComponent
     FirebaseModule,
     MaterialModule,
     FlexLayoutModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
 
   exports: [FirebaseModule, MaterialModule],

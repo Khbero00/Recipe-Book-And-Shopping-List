@@ -1,33 +1,35 @@
-<div *ngIf="recipe">
-    <div class="row">
-        <!-- <div class="col-9">
-            <img src="{{recipe.imagePath}}" alt="Recipe Image" class="img-fluid">
-        </div> -->
+<section class="recipe-background" *ngIf="recipe">
+<app-header></app-header>
+    <div>
+        <h1 class="title">{{recipe.name}} Details</h1>
     </div>
-    <br><br>
-    <div class="row">
-        <div class="col">
-            <h1><strong>{{recipe.name}}</strong></h1>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col">
-            <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
-        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-            <button class="dropdown-item">Action - 1</button>
-            <button class="dropdown-item">Another Action</button>
-            <button class="dropdown-item">Something else is here</button>
-        </div>
-        </div>
-    </div>
-    </div>
-    <br>
-    <div class="row">
-        <div class="col-9">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="30px" class="ingredients-and-steps">
+        <div fxFlex="50">
             <div>
-                <h2><strong>{{recipe.description}}</strong></h2>
+                <div>
+                    <h1 class="content-title">{{recipe.name}} Ingredients</h1>
+                </div>
+                <mat-selection-list #ingredients role="list" class="list-background">
+                    <mat-list-option *ngFor="let ingredient of recipe.ingredients" [value]="[ingredient.name, ingredient.quantity]">
+                      {{ingredient.name}} | {{ingredient.quantity}}
+                    </mat-list-option>
+                </mat-selection-list>
+                <div class="example-button-row">
+                    <button mat-raised-button color="primary" (click)="addToShoppingList(ingredients.selectedOptions)">Add To Shopping List</button>
+                </div>
+            </div>
+        </div>
+        <div fxFlex="50">
+            <div>
+                <div>
+                    <h1 class="content-title">{{recipe.name}} Steps</h1>
+                </div>
+                <mat-list role="list" class="list-background">
+                    <mat-list-item *ngFor="let step of recipe.directions">
+                        {{step}}
+                    </mat-list-item>
+                </mat-list>
             </div>
         </div>
     </div>
-</div>
+</section>

@@ -10,7 +10,7 @@ export class RecipeFormService {
 
   constructor() { }
 
-  public addRecipeForm() {
+  public addRecipeForm(): FormGroup {
     return this.getRecipeFormGroup();
   }
 
@@ -44,7 +44,9 @@ export class RecipeFormService {
       'nickName': new FormControl(null, Validators.required),
       'directions': new FormArray([], Validators.required),
       'ingredients': new FormArray([], Validators.required),
-      'userId': new FormControl(localStorage.getItem('userId'))
+      'userId': new FormControl(localStorage.getItem('userId')),
+      'shoppingListAdd': new FormControl(false),
+
     });
   }
 }

@@ -1,10 +1,72 @@
-.img-border {
-    border: 1px solid black;
+
+.recipe-background {
+  background-image: url("https://images.unsplash.com/photo-1512798705819-f4be9c1ed36e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4c61e3ba49f4717779d91a0f7a703004&auto=format&fit=crop&w=1350&q=80"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: top center;
+  overflow: auto;
+  height: 100vh;
+  padding: 0;
 }
 
-img {
-    /* min-width: 200px; */
-    width: 700px;
-    height: 400px;
+.example-button-row button,
+.example-button-row a {
+  margin-right: 8px;
 }
+
+.content-title {
+  color: #fff;
+  text-align: center; 
+  margin-bottom: 20px;
+}
+
+.ingredients-and-steps {
+    margin-top: 30px;
+
+}
+
+.list-background {
+    background: #515252;
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .title {
+      font-size: 80px;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+  } 
+  
+  /* Medium devices (landscape tablets, 768px and up) */
+  @media only screen and (min-width: 768px) {
+    .title {
+      font-size: 8vw;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+  } 
+  
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    .title {
+      font-size: 8vw;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+  } 
+  
+  /* Extra large devices (large laptops and desktops, 1200px and up) */
+  @media only screen and (min-width: 1200px) {
+    .title {
+      font-size: 8vw;
+      margin-top: 30px;
+      color: #fff;
+      text-align: center;
+    }
+  }
   

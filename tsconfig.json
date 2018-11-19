@@ -19,7 +19,9 @@
 
     "paths": {
       "@myapp-models/*": ["src/app/models/*"],
-      "@myapp-services/*": ["src/app/services/*"]
+      "@myapp-services/*": ["src/app/services/*"],
+      // Shared Components
+      "@myapp-shared-components/*": ["src/app/shared/components/*"]
     }
   }
 }

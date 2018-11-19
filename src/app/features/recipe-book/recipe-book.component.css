@@ -18,6 +18,16 @@
   right: 20px;
 }
 
+.recipe-background {
+  background-image: url("https://images.unsplash.com/photo-1538725277816-3f0794fed9e7?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=c6f19daf8dd682dc3af3fcfda99c6ab1&auto=format&fit=crop&w=1350&q=80"); /* The image used */
+  background-color: #cccccc; /* Used if the image is unavailable */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; /* Resize the background image to cover the entire container */
+  background-position: top center;
+  overflow: auto;
+  height: 100vh;
+}
+
 
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
@@ -26,15 +36,6 @@
     margin-top: 30px;
     color: #fff;
     text-align: center;
-  }
-  
-  .recipe-background {
-    background-image: url("src/assets/img/photo-1538725277816-3f0794fed9e7.jpg"); /* The image used */
-    background-color: #cccccc; /* Used if the image is unavailable */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-position: top center;
-    /* height: 100vh; */
   }
 } 
 
@@ -46,15 +47,6 @@
     color: #fff;
     text-align: center;
   }
-
-  .recipe-background {
-    background-image: url("src/assets/img/photo-1538725277816-3f0794fed9e7.jpg"); /* The image used */
-    background-color: #cccccc; /* Used if the image is unavailable */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-position: top center;
-    /* height: 100vh; */
-  }
 } 
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -64,16 +56,6 @@
     margin-top: 30px;
     color: #fff;
     text-align: center;
-  }
-
-  .recipe-background {
-    background-image: url("src/assets/img/photo-1538725277816-3f0794fed9e7.jpg"); /* The image used */
-    background-color: #cccccc; /* Used if the image is unavailable */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-position: top center;
-    overflow: hidden;
-    height: 100vh;
   }
 } 
 
@@ -85,16 +67,6 @@
     color: #fff;
     text-align: center;
   }
-  
-  .recipe-background {
-    background-image: url("src/assets/img/photo-1538725277816-3f0794fed9e7.jpg"); /* The image used */
-    background-color: #cccccc; /* Used if the image is unavailable */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-position: top center;
-    overflow: hidden;
-    height: 100vh;
-  }
 } 
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -104,15 +76,5 @@
     margin-top: 30px;
     color: #fff;
     text-align: center;
-  }
-  
-  .recipe-background {
-    background-image: url("src/assets/img/photo-1538725277816-3f0794fed9e7.jpg"); /* The image used */
-    background-color: #cccccc; /* Used if the image is unavailable */
-    background-repeat: no-repeat; /* Do not repeat the image */
-    background-size: cover; /* Resize the background image to cover the entire container */
-    background-position: top center;
-    overflow: hidden;
-    height: 100vh;
   }
 }

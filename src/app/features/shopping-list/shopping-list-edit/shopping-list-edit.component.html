@@ -11,15 +11,18 @@
     <mat-card-content class="shopping-list-content">
        <div fxFlex>
           <h2>Shopping List Items</h2>
-          <mat-list role="list">
-            <mat-list-item role="listitem" *ngFor="let item of shoppingList.items">{{item.name}}</mat-list-item>
-          </mat-list>
+          <mat-chip-list>
+            <mat-chip color="primary" selected *ngFor="let item of shoppingList.items">{{item.name}}</mat-chip>
+         </mat-chip-list>
        </div>
     </mat-card-content>
     <mat-card-actions class="example-button-row">
        <button mat-mini-fab matTooltip="Edit a shoppping list" matTooltipPosition="above" color="primary" (click)="editShoppingList(shoppingList)">
           <mat-icon>edit</mat-icon>
        </button>
+       <button mat-mini-fab matTooltip="View shopping list" matTooltipPosition="above" color="accent" (click)="viewShoppingList(shoppingList)">
+            <mat-icon>view_list</mat-icon>
+         </button>
        <button mat-mini-fab matTooltip="Delete a shopping list" matTooltipPosition="above" color="warn" (click)="deleteShoppingList(shoppingList)">
           <mat-icon>close</mat-icon>
        </button>

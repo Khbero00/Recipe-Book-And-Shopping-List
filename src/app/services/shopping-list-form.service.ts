@@ -37,7 +37,8 @@ export class ShoppingListFormService {
       'id': new FormControl(0),
       'name': new FormControl(null, Validators.required),
       'items': new FormArray([], Validators.required),
-      'userId': new FormControl(localStorage.getItem('userId'))
+      'userId': new FormControl(null),
+      'recipeAdd': new FormControl(false)
     });
   }
 }

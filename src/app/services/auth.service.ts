@@ -1,12 +1,11 @@
 
-import {map, switchMap,  filter } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { auth } from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
-import { Observable ,  from, of } from 'rxjs';
-import { User } from '@myapp-models/user.model';
-
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable ,  from } from 'rxjs';
+import { takeUntil, map, filter } from 'rxjs/operators';
+import { Router } from '@angular/router';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,17 +14,13 @@ export class AuthService {
   public user: Observable<any>;
   public isLoggedIn: boolean = false;
 
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore) { 
+  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) { 
     this.user = afAuth.authState;
   }
   
-  getUser(user) {
-    this.afs.doc(`users/${user.uid}`).valueChanges().subscribe((user: User) => {
-     localStorage.setItem('userEmail', user.email);
-     localStorage.setItem('username', user.username);
-     localStorage.setItem('firstName', user.firstName);
-     localStorage.setItem('lastName', user.lastName);
-    });
+  getUser(userAuth) {
+    localStorage.setItem('userId', userAuth.uid);
+    return this.afs.doc(`users/${userAuth.uid}`).valueChanges();
   }
 
   emailSignUp(email: string, password: string) {
@@ -33,9 +28,7 @@ export class AuthService {
   }
 
   login(email: string, password: string): Observable<auth.UserCredential> {
-    return from(
-      this.afAuth.auth.signInWithEmailAndPassword(email, password)
-    );
+    return from(this.afAuth.auth.signInWithEmailAndPassword(email, password));
   }
 
   isAuthenticated(): Observable<boolean> {
@@ -43,7 +36,8 @@ export class AuthService {
   }
 
   logout() {
-    this.afAuth.auth.signOut();
+   this.afAuth.auth.signOut();
   }
+
 }
 

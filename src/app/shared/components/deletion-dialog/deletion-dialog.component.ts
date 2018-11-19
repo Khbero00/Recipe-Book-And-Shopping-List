@@ -16,4 +16,8 @@ export class DeletionDialogComponent implements OnInit {
     if (this.data.hasOwnProperty("deletionConfirmation")) this.dialogType = "deletionConfirmation";
   }
 
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }

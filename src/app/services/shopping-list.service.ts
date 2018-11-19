@@ -18,12 +18,15 @@ export class ShoppingListService {
   public shoppingList: ShoppingList[];
 
   constructor(private afs: AngularFirestore) {
-    this.shoppingListCollection = afs.collection('shopping-list');
+    this.shoppingListCollection = afs.collection('shoppingList');
     this.itemsCollection = afs.collection('items');
   }
 
   getShoppingLists(): Observable<ShoppingList[]> {
-    return this.afs.collection<ShoppingList>('shopping-list').valueChanges();
+    return this.afs.collection<ShoppingList>('shoppingList', ref => {
+      return ref.where("userId", "==", localStorage.getItem("userId"))
+                .orderBy("name");
+    }).valueChanges();
   }
 
   getShoppingListItemsByShoppingListId(shoppingListId): Observable<Items[]> {
@@ -48,7 +51,7 @@ export class ShoppingListService {
 
   updateShoppingList(shoppingList: ShoppingList) {
     const userId = localStorage.getItem('userId');
-    this.shoppingListItemDoc = this.afs.doc<ShoppingList>(`items/${shoppingList.id}`);
+    this.shoppingListItemDoc = this.afs.doc<ShoppingList>(`shoppingList/${shoppingList.id}`);
     this.shoppingListItemDoc.update({
       id: shoppingList.id,
       name: shoppingList.name,
@@ -84,11 +87,15 @@ export class ShoppingListService {
   }
 
   deleteShoppingList(shoppingList: ShoppingList): Observable<any> {
-    return from(this.afs.doc(`items/${shoppingList.id}`).delete()).pipe(
+    return from(this.afs.doc(`shoppingList/${shoppingList.id}`).delete()).pipe(
       map(r => {
        this.deleteShoppingListItems(shoppingList.items);
       }, error => console.log(error))
     )
+  }
+
+  deleteShoppingListItem(shoppingListItemId: string) {
+    this.afs.doc(`items/${shoppingListItemId}`).delete();
   }
 
   deleteShoppingListItems(shoppingListItems: Items[]) {

@@ -1,14 +1,10 @@
-.bg-custom {
-    background-color: #ffeb3b;
-}
+.bg-custom { background-color: #ffeb3b; }
 
 .elevation-z6 {
     box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
 }
 
-.nav-link, .navbar-brand {
-    color: #424242 !important;
-}
+.nav-link, .navbar-brand { color: #424242 !important; }
 
 .navbar-header {
     display: flex;
@@ -17,11 +13,7 @@
     padding: 8px 16px;
 }
 
-.example-fill-remaining-space {
-    /* This fills the remaining space, by using flexbox. 
-       Every toolbar row uses a flexbox row layout. */
-    flex: 1 1 auto;
-  }
+.example-fill-remaining-space { flex: 1 1 auto; }
 
 .example-button-row button,
 .example-button-row a {
