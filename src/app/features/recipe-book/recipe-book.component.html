@@ -1,7 +1,7 @@
-<section class="container-fluid recipe-background">
+<section class="recipe-background">
    <app-header></app-header>
-   <div>
-      <h1 class="title">{{fullName}}'s Recipes</h1>
+   <div fxLayout="column wrap">
+      <h1 class="title" fxFlex>{{fullName}}'s Recipes</h1>
    </div>
    <div>
       <app-recipe-list [recipes]="recipes"></app-recipe-list>

@@ -2,10 +2,6 @@
   border-top-width: 4px;
 }
 
-.container-fluid {
-  padding: 0;
-}
-
 .example-button-row button,
 .example-button-row a {
   margin-right: 10px;
@@ -25,6 +21,7 @@
   background-size: cover; /* Resize the background image to cover the entire container */
   background-position: top center;
   overflow: auto;
+  padding: 0;
   height: 100vh;
 }
 
@@ -32,7 +29,7 @@
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .title {
-    font-size: 80px;
+    font-size: 58px;
     margin-top: 30px;
     color: #fff;
     text-align: center;
@@ -42,7 +39,7 @@
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .title {
-    font-size: 80px;
+    font-size: 60px;
     margin-top: 30px;
     color: #fff;
     text-align: center;
